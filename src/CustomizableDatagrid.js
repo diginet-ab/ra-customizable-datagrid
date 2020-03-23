@@ -87,14 +87,15 @@ class CustomizableDatagrid extends Component {
   handleClose = () => this.setState({ modalOpened: false });
 
   renderChild = child => {
-    const source = get(child, ['props', 'source']);
-    const { selection } = this.state;
+    if (child) {
+      const source = get(child, ['props', 'source']);
+      const { selection } = this.state;
 
-    // Show children without source, or children explicitly visible
-    if (!source || selection[source]) {
-      return React.cloneElement(child, {});
+      // Show children without source, or children explicitly visible
+      if (!source || selection[source]) {
+        return React.cloneElement(child, {});
+      }
     }
-
     return null;
   };
 
@@ -117,7 +118,7 @@ class CustomizableDatagrid extends Component {
             onClose={this.handleClose}
           />
         )}
-        <Datagrid {...rest}>{React.Children.toArray().filter(c => c != null).map(children, this.renderChild)}</Datagrid>
+        <Datagrid {...rest}>{React.Children.map(children, this.renderChild)}</Datagrid>
       </div>
     );
   }
