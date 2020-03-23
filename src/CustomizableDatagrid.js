@@ -117,7 +117,7 @@ class CustomizableDatagrid extends Component {
             onClose={this.handleClose}
           />
         )}
-        <Datagrid {...rest}>{React.Children.map(children, this.renderChild)}</Datagrid>
+        <Datagrid {...rest}>{React.Children.filter(c => c != null).map(children, this.renderChild)}</Datagrid>
       </div>
     );
   }
