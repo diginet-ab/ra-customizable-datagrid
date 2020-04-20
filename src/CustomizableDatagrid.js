@@ -62,7 +62,12 @@ class CustomizableDatagrid extends Component {
 
     // if defaultColumns are set let's return them
     if (!isEmpty(defaultColumns)) {
-      return arrayToSelection(defaultColumns);
+      // Any ! character? (use to subtract columns from default)
+      if (defaultColumns.reduce((sub, col) => sub || col.indexOf('!') >= 0), false) {
+        let excludeColumns = defaultColumns.map(item => item.indexOf('!') === 0 ? item.slice(1) : item)
+        return arrayToSelection(this.getColumnNames().filter(v => excludeColumns.indexOf(v) < 0));
+      } else
+        return arrayToSelection(defaultColumns);
     }
 
     // otherwise we fallback on the default behaviour : display all columns
