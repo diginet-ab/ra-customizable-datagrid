@@ -111,7 +111,7 @@ class CustomizableDatagrid extends Component {
     return (
       <div>
         <div style={{ float: 'right', marginRight: '1rem' }}>
-          <Button variant="outlined" mini aria-label="add" onClick={this.handleOpen}>
+          <Button variant="outlined" aria-label="add" onClick={this.handleOpen}>
             <ColumnIcon />
           </Button>
         </div>
